@@ -1,3 +1,6 @@
+# zmu
+Subtitle generator using Whisper &amp; FunASR model
+
 # Subgen 使用指南
 
 ## 快速开始
