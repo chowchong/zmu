@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# PyInstaller
+*.spec
+build_log.txt
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# macOS
+.DS_Store
+._*
+
+# 模型和缓存（太大，不要提交）
+models/
+cache/
+*.pt
+*.bin
+*.safetensors
+
+# 临时和备份文件
+*.backup
+*.broken_backup
+fix_*.py
+gui_progress_patch.py
+BUGFIX_*.py
+
+# 用户数据
+user_dict.txt

@@ -1,0 +1,11 @@
+openai-whisper
+funasr
+modelscope
+pysrt
+tqdm
+torch
+torchaudio
+pydub
+ffmpeg-python
+argostranslate
+# PyQt6  # Uncomment if using GUI

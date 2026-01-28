@@ -1,0 +1,677 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww16200\viewh19300\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 # Subgen - \uc0\u26234 \u33021 \u23383 \u24149 \u29983 \u25104 \u22120 \u39033 \u30446 \u25991 \u26723 \
+\
+## \uc0\u39033 \u30446 \u27010 \u36848 \
+**\uc0\u39033 \u30446 \u21517 \u31216 **: Subgen  \
+**\uc0\u26680 \u24515 \u21151 \u33021 **: \u22810 \u24341 \u25806 \u26234 \u33021 \u23383 \u24149 \u29983 \u25104 \u24037 \u20855 \u65292 \u25903 \u25345  Whisper \u21644  FunASR \u27169 \u22411   \
+**\uc0\u30446 \u26631 \u24179 \u21488 **: macOS (M1/M2/Mac Studio \u20248 \u20808 )\u65292 Windows \u27425 \u35201   \
+**\uc0\u24320 \u21457 \u35821 \u35328 **: Python 3.10+  \
+**\uc0\u29992 \u25143 \u23450 \u20301 **: \u35270 \u39057 \u21019 \u20316 \u32773 \u65288 \u24494 \u30701 \u21095 \u12289 YouTube \u30701 \u29255 \u12289 \u32508 \u33402 \u33410 \u30446 \u21046 \u20316 \u65289 \
+\
+---\
+\
+## \uc0\u26680 \u24515 \u38656 \u27714 \u19982 \u30171 \u28857 \
+\
+### \uc0\u29992 \u25143 \u30171 \u28857 \u65288 \u26469 \u33258  StoryToolkitAI \u20351 \u29992 \u32463 \u39564 \u65289 \
+1. **\uc0\u21475 \u38899 \u35782 \u21035 \u38382 \u39064 **: \u26032 \u21152 \u22369 /\u39532 \u26469 \u35199 \u20122 \u21475 \u38899 \u35782 \u21035 \u29575 \u20302 \u65288 \u20013 \u33521 \u28151 \u26434 \u65289 \
+2. **\uc0\u38271 \u35270 \u39057 \u38169 \u20301 **: \u36229 \u36807  15 \u20998 \u38047 \u35270 \u39057 \u20986 \u29616 \u37325 \u22797 \u35782 \u21035 \u65292 \u23548 \u33268 \u26102 \u38388 \u30721 \u38169 \u20301 \
+3. **\uc0\u22788 \u29702 \u36895 \u24230 \u24930 **: \u32570 \u20047  Apple Silicon \u20248 \u21270 \
+4. **\uc0\u27169 \u22411 \u23616 \u38480 **: \u26080 \u27861 \u20351 \u29992  FunASR\u65292 \u19981 \u33021 \u28155 \u21152 \u26032 \u27169 \u22411 \
+5. **\uc0\u26080 \u27861 \u32534 \u36753 **: \u29983 \u25104 \u21518 \u26080 \u27861 \u22312  App \u20869 \u20462 \u25913 \u23383 \u24149 \
+6. **\uc0\u29992 \u25143 \u20064 \u24815 **: \u24076 \u26395 \u31995 \u32479 \u33021 \u23398 \u20064 \u29992 \u25143 \u20462 \u25913 \u20064 \u24815 \u65288 \u22914  "kopitiam" \u8594  "\u21654 \u21857 \u24215 "\u65289 \
+\
+### \uc0\u30446 \u26631 \u22330 \u26223 \
+1. **\uc0\u24494 \u30701 \u21095 **: 90 \u31186 \u65292 9:16 \u31446 \u23631 \u65292 \u38656 \u26497 \u36895 \u22788 \u29702 \u65292 \u25209 \u37327 \u25805 \u20316 \
+2. **YouTube \uc0\u30701 \u29255 **: 3-5 \u20998 \u38047 \u65292 16:9\u65292 \u38656 \u31934 \u20934 \u23383 \u24149 \u65292 \u21487 \u33021 \u21452 \u35821 \
+3. **\uc0\u32508 \u33402 \u33410 \u30446 **: 15-45 \u20998 \u38047 \u65292 \u38656 \u31283 \u23450 \u24615 \u65292 \u22810 \u35828 \u35805 \u20154 \u35782 \u21035 \
+\
+---\
+\
+## \uc0\u25216 \u26415 \u26550 \u26500 \
+\
+### \uc0\u25216 \u26415 \u26632 \
+```python\
+# \uc0\u26680 \u24515 \u20381 \u36182 \
+openai-whisper      # \uc0\u22810 \u35821 \u35328 \u35821 \u38899 \u35782 \u21035 \u65288 OpenAI\u65289 \
+funasr              # \uc0\u20013 \u25991 \u20248 \u21270 \u35782 \u21035 \u65288 \u38463 \u37324 \u36798 \u25705 \u38498 \u65289 \
+modelscope          # FunASR \uc0\u27169 \u22411 \u19979 \u36733 \u24037 \u20855 \
+PyQt6               # \uc0\u36328 \u24179 \u21488  GUI \u26694 \u26550 \
+ffmpeg-python       # \uc0\u38899 \u35270 \u39057 \u22788 \u29702 \
+torch, torchaudio   # \uc0\u28145 \u24230 \u23398 \u20064 \u26694 \u26550 \
+\
+# macOS \uc0\u20248 \u21270 \u65288 \u21487 \u36873 \u65289 \
+mlx-whisper         # Apple Silicon Metal \uc0\u21152 \u36895 \u29256  Whisper\
+\
+# \uc0\u24037 \u20855 \u24211 \
+pysrt               # SRT \uc0\u25991 \u20214 \u22788 \u29702 \
+tqdm                # \uc0\u36827 \u24230 \u26465 \
+requests            # \uc0\u27169 \u22411 \u19979 \u36733 \
+pathlib, json       # \uc0\u25991 \u20214 /\u37197 \u32622 \u31649 \u29702 \
+```\
+\
+### \uc0\u27169 \u22411 \u37197 \u32622 \
+```python\
+MODELS = \{\
+    'funasr': \{\
+        'provider': 'modelscope',\
+        'model_id': 'iic/speech_paraformer-large-vad-punc_asr_nat-zh-cn-16k-common-vocab8404-pytorch',\
+        'required': True,  # \uc0\u24517 \u38656 \u23433 \u35013 \
+        'size_mb': 220,\
+        'best_for': '\uc0\u20013 \u25991 \u23545 \u30333 \u12289 \u26032 \u39532 \u21475 \u38899 '\
+    \},\
+    'whisper_small': \{\
+        'provider': 'openai',\
+        'model_id': 'small',\
+        'required': True,\
+        'size_mb': 244,\
+        'best_for': '\uc0\u33521 \u25991 \u20869 \u23481 \u12289 \u22810 \u35821 \u35328 \u28151 \u21512 '\
+    \},\
+    'whisper_medium': \{\
+        'provider': 'openai',\
+        'model_id': 'medium',\
+        'required': True,\
+        'size_mb': 769,\
+        'best_for': '\uc0\u39640 \u36136 \u37327 \u33521 \u25991 \u35782 \u21035 '\
+    \},\
+    'whisper_large': \{\
+        'provider': 'openai',\
+        'model_id': 'large-v3',\
+        'required': False,  # \uc0\u29992 \u25143 \u21487 \u36873 \u23433 \u35013 \
+        'size_mb': 1550,\
+        'best_for': '\uc0\u22797 \u26434 \u21475 \u38899 \u12289 \u19987 \u19994 \u26415 \u35821 '\
+    \}\
+\}\
+```\
+\
+---\
+\
+## \uc0\u26680 \u24515 \u27169 \u22359 \u35774 \u35745 \
+\
+### 1. ModelManager\uc0\u65288 \u27169 \u22411 \u31649 \u29702 \u22120 \u65289 \
+**\uc0\u32844 \u36131 **: \u33258 \u21160 \u19979 \u36733 \u12289 \u29256 \u26412 \u31649 \u29702 \u12289 \u27169 \u22411 \u29366 \u24577 \u26816 \u26597 \
+\
+**\uc0\u20851 \u38190 \u26041 \u27861 **:\
+```python\
+class ModelManager:\
+    def __init__(self):\
+        # \uc0\u27169 \u22411 \u23384 \u20648 \u36335 \u24452 : ~/.subgen/models/\
+        # \uc0\u37197 \u32622 \u25991 \u20214 : ~/.subgen/models/config.json\
+    \
+    def check_installation(self) -> Dict[str, bool]:\
+        # \uc0\u26816 \u26597 \u25152 \u26377 \u27169 \u22411 \u26159 \u21542 \u24050 \u19979 \u36733 \
+        # Whisper \uc0\u32531 \u23384 : ~/.cache/whisper/\
+        # FunASR \uc0\u32531 \u23384 : ~/.cache/modelscope/hub/\
+    \
+    def install_required_models(self):\
+        # \uc0\u39318 \u27425 \u36816 \u34892 \u33258 \u21160 \u23433 \u35013 \u24517 \u38656 \u27169 \u22411 \u65288 funasr, whisper_small, whisper_medium\u65289 \
+        # \uc0\u26174 \u31034 \u19979 \u36733 \u36827 \u24230 \u12289 \u22823 \u23567 \u12289 \u29992 \u36884 \
+    \
+    def download_model(self, model_key: str):\
+        # \uc0\u21333 \u29420 \u19979 \u36733 \u25351 \u23450 \u27169 \u22411 \u65288 \u22914  whisper_large\u65289 \
+        # \uc0\u26681 \u25454  provider \u35843 \u29992 \u19981 \u21516 \u19979 \u36733 \u26041 \u27861 \
+    \
+    def get_recommended_model(self, language: str) -> str:\
+        # \uc0\u26234 \u33021 \u25512 \u33616 \u65306 \u20013 \u25991  \u8594  funasr\u65292 \u33521 \u25991  \u8594  whisper_medium\
+```\
+\
+**\uc0\u23454 \u29616 \u32454 \u33410 **:\
+- Whisper \uc0\u27169 \u22411 \u36890 \u36807  `whisper.load_model(model_id)` \u33258 \u21160 \u19979 \u36733 \
+- FunASR \uc0\u27169 \u22411 \u36890 \u36807  `modelscope.hub.snapshot_download()` \u19979 \u36733 \
+- \uc0\u37197 \u32622 \u25991 \u20214 \u35760 \u24405 \u24050 \u23433 \u35013 \u27169 \u22411 \u21644 \u29256 \u26412 \u20449 \u24687 \
+\
+---\
+\
+### 2. SubtitleEngine\uc0\u65288 \u23383 \u24149 \u29983 \u25104 \u24341 \u25806 \u65289 \
+**\uc0\u32844 \u36131 **: \u35821 \u38899 \u35782 \u21035 \u12289 \u26234 \u33021 \u27169 \u22411 \u36873 \u25321 \u12289 \u29992 \u25143 \u35789 \u20856 \u12289 SRT \u29983 \u25104 \
+\
+**\uc0\u20851 \u38190 \u26041 \u27861 **:\
+```python\
+class SubtitleEngine:\
+    def __init__(self):\
+        self.model_manager = ModelManager()\
+        self.loaded_models = \{\}  # \uc0\u27169 \u22411 \u32531 \u23384 \u65288 \u36991 \u20813 \u37325 \u22797 \u21152 \u36733 \u65289 \
+        self.user_dict = self._load_user_dict()  # \uc0\u29992 \u25143 \u33258 \u23450 \u20041 \u35789 \u20856 \
+        self._first_run_check()  # \uc0\u39318 \u27425 \u36816 \u34892 \u23433 \u35013 \u27169 \u22411 \
+    \
+    def transcribe(self, video_path, model_key=None, language=None) -> Dict:\
+        # 1. \uc0\u33258 \u21160 \u35821 \u35328 \u26816 \u27979 \u65288 \u29992  Whisper tiny \u24555 \u36895 \u26816 \u27979 \u65289 \
+        # 2. \uc0\u26234 \u33021 \u36873 \u25321 \u27169 \u22411 \u65288 \u20013 \u25991  \u8594  funasr\u65292 \u33521 \u25991  \u8594  whisper\u65289 \
+        # 3. \uc0\u21152 \u36733 \u27169 \u22411 \u24182 \u36716 \u24405 \
+        # 4. \uc0\u24212 \u29992 \u29992 \u25143 \u35789 \u20856 \u26367 \u25442 \
+        # \uc0\u36820 \u22238 \u32479 \u19968 \u26684 \u24335 : \{'language': 'zh', 'segments': [...], 'text': '...'\}\
+    \
+    def _transcribe_whisper(self, model, video_path, language) -> Dict:\
+        # Whisper \uc0\u36716 \u24405 \u36923 \u36753 \
+        # \uc0\u36820 \u22238 \u26631 \u20934 \u26684 \u24335 \u30340  segments\
+    \
+    def _transcribe_funasr(self, model, video_path) -> Dict:\
+        # FunASR \uc0\u36716 \u24405 \u36923 \u36753 \
+        # \uc0\u36716 \u25442  FunASR \u29305 \u27530 \u26684 \u24335 \u21040 \u26631 \u20934  segments \u26684 \u24335 \
+        # sentence_info \uc0\u20013 \u30340 \u26102 \u38388 \u25139 \u20174 \u27627 \u31186 \u36716 \u31186 \
+    \
+    def save_srt(self, result, output_path) -> str:\
+        # \uc0\u29983 \u25104  SRT \u25991 \u20214 \
+        # \uc0\u26684 \u24335 : \u24207 \u21495  \\n \u26102 \u38388 \u25139  --> \u26102 \u38388 \u25139  \\n \u23383 \u24149 \u25991 \u26412  \\n\\n\
+```\
+\
+**\uc0\u29992 \u25143 \u35789 \u20856 \u26426 \u21046 **:\
+```python\
+# \uc0\u23384 \u20648 \u20301 \u32622 : ~/.subgen/user_dict.json\
+default_dict = \{\
+    'kopitiam': '\uc0\u21654 \u21857 \u24215 ',\
+    'kopi': '\uc0\u21654 \u21857 ',\
+    'makan': '\uc0\u21507 \u39277 ',\
+    'laksa': '\uc0\u21499 \u27801 '\
+\}\
+# \uc0\u22312 \u36716 \u24405 \u32467 \u26524 \u20013 \u33258 \u21160 \u26367 \u25442 \u36825 \u20123 \u35789 \u27719 \
+```\
+\
+**\uc0\u26234 \u33021 \u35821 \u35328 \u26816 \u27979 **:\
+```python\
+# \uc0\u20351 \u29992  Whisper tiny \u27169 \u22411 \u24555 \u36895 \u26816 \u27979 \u65288 < 5 \u31186 \u65289 \
+temp_model = whisper.load_model('tiny')\
+audio = whisper.load_audio(video_path)\
+mel = whisper.log_mel_spectrogram(audio)\
+_, probs = temp_model.detect_language(mel)\
+language = max(probs, key=probs.get)  # 'zh', 'en', \uc0\u31561 \
+```\
+\
+---\
+\
+### 3. \uc0\u25968 \u25454 \u26684 \u24335 \u26631 \u20934 \u21270 \
+\
+**\uc0\u32479 \u19968 \u30340  segments \u26684 \u24335 **:\
+```python\
+\{\
+    'language': 'zh',  # \uc0\u26816 \u27979 \u21040 \u30340 \u35821 \u35328 \
+    'text': '\uc0\u23436 \u25972 \u36716 \u24405 \u25991 \u26412 ',\
+    'segments': [\
+        \{\
+            'start': 0.0,      # \uc0\u24320 \u22987 \u26102 \u38388 \u65288 \u31186 \u65289 \
+            'end': 2.5,        # \uc0\u32467 \u26463 \u26102 \u38388 \u65288 \u31186 \u65289 \
+            'text': '\uc0\u23383 \u24149 \u20869 \u23481 '\
+        \},\
+        ...\
+    ]\
+\}\
+```\
+\
+**SRT \uc0\u26102 \u38388 \u25139 \u26684 \u24335 **:\
+```python\
+# \uc0\u26684 \u24335 : HH:MM:SS,mmm\
+def _format_timestamp(seconds: float) -> str:\
+    hours = int(seconds // 3600)\
+    minutes = int((seconds % 3600) // 60)\
+    secs = int(seconds % 60)\
+    millis = int((seconds % 1) * 1000)\
+    return f"\{hours:02d\}:\{minutes:02d\}:\{secs:02d\},\{millis:03d\}"\
+\
+# \uc0\u31034 \u20363 : 65.5 \u31186  \u8594  "00:01:05,500"\
+```\
+\
+---\
+\
+## \uc0\u24320 \u21457 \u36335 \u32447 \u22270 \u65288 \u20998 \u38454 \u27573 \u36845 \u20195 \u65289 \
+\
+### \uc0\u38454 \u27573  1: MVP \u26680 \u24515 \u21151 \u33021 \u65288 \u31532  1 \u21608 \u65289 \u9989  \u24403 \u21069 \u38454 \u27573 \
+**\uc0\u30446 \u26631 **: \u21629 \u20196 \u34892 \u24037 \u20855 \u65292 \u33021 \u29992 \u21363 \u21487 \
+\
+**\uc0\u24050 \u23436 \u25104 **:\
+- \uc0\u9989  ModelManager \u27169 \u22411 \u31649 \u29702 \u31995 \u32479 \
+- \uc0\u9989  SubtitleEngine \u21452 \u24341 \u25806 \u25903 \u25345 \
+- \uc0\u9989  \u33258 \u21160 \u27169 \u22411 \u19979 \u36733 \u21644 \u23433 \u35013 \
+- \uc0\u9989  \u26234 \u33021 \u35821 \u35328 \u26816 \u27979 \u21644 \u27169 \u22411 \u25512 \u33616 \
+- \uc0\u9989  \u29992 \u25143 \u35789 \u20856 \u22522 \u30784 \u21151 \u33021 \
+- \uc0\u9989  SRT \u25991 \u20214 \u29983 \u25104 \
+\
+**\uc0\u27979 \u35797 \u20219 \u21153 **:\
+- 90 \uc0\u31186 \u24494 \u30701 \u21095 \u27979 \u35797 \u65288 \u39044 \u26399  30-45 \u31186 \u22788 \u29702 \u65289 \
+- \uc0\u20013 \u25991 \u21475 \u38899 \u35782 \u21035 \u27979 \u35797 \u65288 FunASR\u65289 \
+- \uc0\u33521 \u25991 \u20869 \u23481 \u27979 \u35797 \u65288 Whisper\u65289 \
+\
+---\
+\
+### \uc0\u38454 \u27573  2: GUI \u30028 \u38754 \u65288 \u31532  2 \u21608 \u65289 \
+**\uc0\u30446 \u26631 **: \u22270 \u24418 \u30028 \u38754 \u65292 \u25302 \u25341 \u25805 \u20316 \
+\
+**\uc0\u30028 \u38754 \u35774 \u35745 **:\
+```\
+\uc0\u9484 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9488 \
+\uc0\u9474   Subgen                      [_] [\u9633 ] [\'d7]    \u9474 \
+\uc0\u9500 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9508 \
+\uc0\u9474   \u25302 \u25341 \u35270 \u39057 \u25991 \u20214 \u21040 \u36825 \u37324                           \u9474 \
+\uc0\u9474   \u25110  [\u36873 \u25321 \u25991 \u20214 ] [\u25209 \u37327 \u36873 \u25321 ]                    \u9474 \
+\uc0\u9500 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9508 \
+\uc0\u9474   \u27169 \u22411 : \u9679  \u33258 \u21160 \u26816 \u27979   \u9675  FunASR  \u9675  Whisper     \u9474 \
+\uc0\u9474   \u35821 \u35328 : \u33258 \u21160  \u9660       \u22330 \u26223 : \u24494 \u30701 \u21095  \u9660            \u9474 \
+\uc0\u9500 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9508 \
+\uc0\u9474   [\u24320 \u22987 \u22788 \u29702 ]                                  \u9474 \
+\uc0\u9474   \u36827 \u24230 : \u9619 \u9619 \u9619 \u9619 \u9619 \u9619 \u9619 \u9617 \u9617 \u9617  65%  (2/3 \u25991 \u20214 )          \u9474 \
+\uc0\u9500 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9508 \
+\uc0\u9474   \u9989  video1.mp4 \u8594  video1.srt                 \u9474 \
+\uc0\u9474   \u9203  video2.mp4 \u22788 \u29702 \u20013 ...                     \u9474 \
+\uc0\u9474   \u9208  video3.mp4 \u31561 \u24453 \u20013                         \u9474 \
+\uc0\u9492 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9496 \
+```\
+\
+**\uc0\u25216 \u26415 \u23454 \u29616 **:\
+```python\
+# \uc0\u20351 \u29992  PyQt6\
+from PyQt6.QtWidgets import (\
+    QMainWindow, QApplication, QPushButton,\
+    QProgressBar, QListWidget, QComboBox\
+)\
+from PyQt6.QtCore import QThread, pyqtSignal\
+\
+class TranscriptionWorker(QThread):\
+    # \uc0\u21518 \u21488 \u32447 \u31243 \u22788 \u29702 \u36716 \u24405 \u65292 \u36991 \u20813 \u30028 \u38754 \u21345 \u27515 \
+    progress = pyqtSignal(int)\
+    finished = pyqtSignal(str)\
+    \
+class MainWindow(QMainWindow):\
+    # \uc0\u25302 \u25341 \u21306 \u22495 \
+    def dragEnterEvent(self, event):\
+        if event.mimeData().hasUrls():\
+            event.accept()\
+    \
+    def dropEvent(self, event):\
+        files = [url.toLocalFile() for url in event.mimeData().urls()]\
+        self.add_files(files)\
+```\
+\
+---\
+\
+### \uc0\u38454 \u27573  3: \u39640 \u32423 \u21151 \u33021 \u65288 \u31532  3-4 \u21608 \u65289 \
+**\uc0\u30446 \u26631 **: \u35299 \u20915 \u38271 \u35270 \u39057 \u38382 \u39064  + \u23383 \u24149 \u32534 \u36753 \u22120 \
+\
+**\uc0\u26032 \u22686 \u21151 \u33021 **:\
+\
+1. **VAD \uc0\u20998 \u27573 \u22788 \u29702 **\u65288 \u35299 \u20915 \u38271 \u35270 \u39057 \u38169 \u20301 \u65289 :\
+```python\
+# \uc0\u20351 \u29992  webrtcvad \u25110  pyannote.audio\
+# 15-45 \uc0\u20998 \u38047 \u35270 \u39057  \u8594  \u27599  10 \u20998 \u38047 \u19968 \u27573 \
+# \uc0\u36991 \u20813  Whisper \u38271 \u35270 \u39057 \u32047 \u31215 \u35823 \u24046 \
+\
+def segment_audio_with_vad(audio_path, segment_duration=600):\
+    # 1. VAD \uc0\u26816 \u27979 \u38745 \u38899 \u27573 \
+    # 2. \uc0\u22312 \u38745 \u38899 \u22788 \u20999 \u20998 \u35270 \u39057 \
+    # 3. \uc0\u20998 \u21035 \u36716 \u24405 \u21508 \u27573 \
+    # 4. \uc0\u21512 \u24182 \u26102 \u38388 \u36724 \
+    pass\
+```\
+\
+2. **\uc0\u20869 \u32622 \u23383 \u24149 \u32534 \u36753 \u22120 **:\
+```\
+\uc0\u9484 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9516 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9488 \
+\uc0\u9474   \u35270 \u39057 \u39044 \u35272     \u9474   \u26102 \u38388 \u36724           \u23383 \u24149 \u25991 \u26412      \u9474 \
+\uc0\u9474               \u9474   \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9474 \
+\uc0\u9474   [\u25773 \u25918 ]      \u9474   00:00:10,000   \u22823 \u23478 \u22909 \u65292 \u20170 \u22825  \u9474 \
+\uc0\u9474   [\u26242 \u20572 ]      \u9474   --> 00:00:13,000           \u9474 \
+\uc0\u9474               \u9474   \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9474 \
+\uc0\u9474   [00:12]     \u9474   00:00:13,000   \u25105 \u20204 \u26469 \u21654 \u21857 \u24215  \u9474 \
+\uc0\u9474               \u9474   --> 00:00:16,500           \u9474 \
+\uc0\u9474               \u9474   [\u32534 \u36753 ] [\u21024 \u38500 ] [\u21512 \u24182 ]        \u9474 \
+\uc0\u9492 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9524 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9496 \
+```\
+\
+3. **\uc0\u29992 \u25143 \u20064 \u24815 \u23398 \u20064 **:\
+```python\
+# \uc0\u29992 \u25143 \u20462 \u25913  "kopitiam" \u8594  "\u21654 \u21857 \u24215 "\
+# \uc0\u31995 \u32479 \u35760 \u24405 :\
+learning_dict = \{\
+    'kopitiam': \{\
+        'correction': '\uc0\u21654 \u21857 \u24215 ',\
+        'count': 5,  # \uc0\u20462 \u25913 \u27425 \u25968 \
+        'confidence': 0.95\
+    \}\
+\}\
+# \uc0\u19979 \u27425 \u33258 \u21160 \u24212 \u29992 \
+```\
+\
+---\
+\
+### \uc0\u38454 \u27573  4: \u25171 \u21253 \u21457 \u24067 \u65288 \u31532  5 \u21608 \u65289 \
+**\uc0\u30446 \u26631 **: \u29420 \u31435  App\u65292 \u19968 \u38190 \u23433 \u35013 \
+\
+**\uc0\u25171 \u21253 \u26041 \u26696 **:\
+```bash\
+# macOS\
+pip install pyinstaller\
+pyinstaller --onefile --windowed \\\
+  --name="Subgen" \\\
+  --icon=icon.icns \\\
+  --add-data="models:models" \\\
+  main.py\
+\
+# \uc0\u29983 \u25104  Subgen.app\u65288 \u21487 \u20998 \u21457 \u65289 \
+```\
+\
+**\uc0\u20248 \u21270 **:\
+- \uc0\u20195 \u30721 \u31614 \u21517 \u65288 macOS Gatekeeper\u65289 \
+- \uc0\u33258 \u21160 \u26356 \u26032 \u26816 \u26597 \
+- \uc0\u23849 \u28291 \u25253 \u21578 \u25910 \u38598 \
+\
+---\
+\
+## \uc0\u24615 \u33021 \u20248 \u21270 \u31574 \u30053 \
+\
+### Apple Silicon \uc0\u20248 \u21270 \
+```python\
+# \uc0\u26041 \u26696  1: MLX Whisper\u65288 Apple \u23448 \u26041 \u25512 \u33616 \u65289 \
+import mlx_whisper\
+model = mlx_whisper.load_model("medium")\
+# \uc0\u36895 \u24230 \u25552 \u21319  3-5 \u20493 \
+\
+# \uc0\u26041 \u26696  2: Whisper.cpp\u65288 C++ \u23454 \u29616 \u65289 \
+# \uc0\u36895 \u24230 \u25552 \u21319  10 \u20493 \u65292 \u20294 \u38598 \u25104 \u22797 \u26434 \
+\
+# \uc0\u26041 \u26696  3: CoreML \u36716 \u25442 \u65288 \u38656 \u35201 \u30740 \u31350 \u65289 \
+```\
+\
+### \uc0\u25209 \u37327 \u22788 \u29702 \u20248 \u21270 \
+```python\
+# \uc0\u22810 \u32447 \u31243 \u22788 \u29702 \u65288 \u20294  GPU \u21516 \u26102 \u21482 \u33021 \u36305 \u19968 \u20010 \u27169 \u22411 \u65289 \
+# \uc0\u39044 \u21152 \u36733 \u27169 \u22411 \u65288 \u36991 \u20813 \u27599 \u27425 \u37325 \u26032 \u21152 \u36733 \u65289 \
+# \uc0\u38431 \u21015 \u31649 \u29702 \u65288 \u20248 \u20808 \u22788 \u29702 \u30701 \u35270 \u39057 \u65289 \
+\
+class BatchProcessor:\
+    def __init__(self):\
+        self.queue = []\
+        self.engine = SubtitleEngine()\
+        self.engine.load_model('whisper_medium')  # \uc0\u39044 \u21152 \u36733 \
+    \
+    def process_queue(self):\
+        # \uc0\u25353 \u25991 \u20214 \u22823 \u23567 \u25490 \u24207 \u65288 \u20808 \u22788 \u29702 \u23567 \u25991 \u20214 \u65289 \
+        sorted_queue = sorted(self.queue, key=lambda x: os.path.getsize(x))\
+        for video in sorted_queue:\
+            self.engine.transcribe(video)\
+```\
+\
+---\
+\
+## \uc0\u37197 \u32622 \u25991 \u20214 \u32467 \u26500 \
+\
+### \uc0\u27169 \u22411 \u37197 \u32622  (~/.subgen/models/config.json)\
+```json\
+\{\
+  "installed_models": \{\
+    "funasr": \{"version": "1.0", "installed_at": "2025-01-27"\},\
+    "whisper_medium": \{"version": "1.0", "installed_at": "2025-01-27"\}\
+  \},\
+  "default_chinese": "funasr",\
+  "default_english": "whisper_medium",\
+  "auto_detect": true\
+\}\
+```\
+\
+### \uc0\u29992 \u25143 \u35789 \u20856  (~/.subgen/user_dict.json)\
+```json\
+\{\
+  "kopitiam": "\uc0\u21654 \u21857 \u24215 ",\
+  "kopi": "\uc0\u21654 \u21857 ",\
+  "makan": "\uc0\u21507 \u39277 ",\
+  "laksa": "\uc0\u21499 \u27801 "\
+\}\
+```\
+\
+### \uc0\u29992 \u25143 \u20559 \u22909  (~/.subgen/preferences.json)\
+```json\
+\{\
+  "theme": "dark",\
+  "default_scene": "youtube_short",\
+  "auto_open_srt": true,\
+  "max_line_length": 20,\
+  "output_directory": "~/Downloads/Subtitles"\
+\}\
+```\
+\
+---\
+\
+## \uc0\u38169 \u35823 \u22788 \u29702 \u19982 \u26085 \u24535 \
+\
+### \uc0\u24120 \u35265 \u38169 \u35823 \u22788 \u29702 \
+```python\
+# 1. \uc0\u27169 \u22411 \u26410 \u23433 \u35013 \
+if not self.model_manager.check_installation().get(model_key):\
+    raise RuntimeError(f"\uc0\u27169 \u22411 \u26410 \u23433 \u35013 \u65292 \u35831 \u20808 \u36816 \u34892 : python model_manager.py install")\
+\
+# 2. \uc0\u25991 \u20214 \u26684 \u24335 \u19981 \u25903 \u25345 \
+supported_formats = ['.mp4', '.mkv', '.avi', '.mov', '.m4a', '.wav']\
+if Path(video_path).suffix not in supported_formats:\
+    raise ValueError(f"\uc0\u19981 \u25903 \u25345 \u30340 \u26684 \u24335 \u65292 \u25903 \u25345 : \{supported_formats\}")\
+\
+# 3. \uc0\u30913 \u30424 \u31354 \u38388 \u19981 \u36275 \
+free_space = shutil.disk_usage(Path.home()).free / 1024 / 1024  # MB\
+if free_space < 2000:  # \uc0\u38656 \u35201 \u33267 \u23569  2GB\
+    raise RuntimeError("\uc0\u30913 \u30424 \u31354 \u38388 \u19981 \u36275 \u65292 \u35831 \u28165 \u29702 \u31354 \u38388 ")\
+\
+# 4. FunASR \uc0\u20381 \u36182 \u38382 \u39064 \
+try:\
+    from funasr import AutoModel\
+except ImportError:\
+    raise ImportError("\uc0\u35831 \u20808 \u23433 \u35013 : pip install funasr modelscope")\
+```\
+\
+### \uc0\u26085 \u24535 \u31995 \u32479 \
+```python\
+import logging\
+\
+logging.basicConfig(\
+    filename=Path.home() / '.subgen' / 'app.log',\
+    level=logging.INFO,\
+    format='%(asctime)s - %(levelname)s - %(message)s'\
+)\
+\
+logger = logging.getLogger('Subgen')\
+logger.info("\uc0\u24320 \u22987 \u22788 \u29702 \u35270 \u39057 : video.mp4")\
+logger.error("\uc0\u27169 \u22411 \u21152 \u36733 \u22833 \u36133 ", exc_info=True)\
+```\
+\
+---\
+\
+## \uc0\u27979 \u35797 \u35745 \u21010 \
+\
+### \uc0\u21333 \u20803 \u27979 \u35797 \
+```python\
+# tests/test_model_manager.py\
+def test_check_installation():\
+    manager = ModelManager()\
+    status = manager.check_installation()\
+    assert 'funasr' in status\
+\
+# tests/test_subtitle_engine.py\
+def test_transcribe_chinese():\
+    engine = SubtitleEngine()\
+    result = engine.transcribe('test_chinese.mp4', model_key='funasr')\
+    assert result['language'] == 'zh'\
+    assert len(result['segments']) > 0\
+```\
+\
+### \uc0\u38598 \u25104 \u27979 \u35797 \
+```python\
+# \uc0\u27979 \u35797 \u23436 \u25972 \u27969 \u31243 \
+def test_full_workflow():\
+    # 1. \uc0\u19979 \u36733 \u27169 \u22411 \
+    manager = ModelManager()\
+    manager.install_required_models()\
+    \
+    # 2. \uc0\u36716 \u24405 \u35270 \u39057 \
+    engine = SubtitleEngine()\
+    result = engine.transcribe('test.mp4')\
+    \
+    # 3. \uc0\u29983 \u25104  SRT\
+    srt_path = engine.save_srt(result, 'test.srt')\
+    \
+    # 4. \uc0\u39564 \u35777  SRT \u25991 \u20214 \
+    assert Path(srt_path).exists()\
+```\
+\
+---\
+\
+## \uc0\u37096 \u32626 \u19982 \u20998 \u21457 \
+\
+### macOS \uc0\u20998 \u21457 \
+```bash\
+# 1. \uc0\u25171 \u21253 \
+pyinstaller Subgen.spec\
+\
+# 2. \uc0\u20195 \u30721 \u31614 \u21517 \
+codesign --deep --force --verify --verbose \\\
+  --sign "Developer ID Application" \\\
+  dist/Subgen.app\
+\
+# 3. \uc0\u20844 \u35777 \u65288 Notarization\u65289 \
+xcrun notarytool submit Subgen.dmg \\\
+  --apple-id "your@email.com" \\\
+  --password "app-specific-password"\
+\
+# 4. \uc0\u21019 \u24314  DMG\
+hdiutil create -volname "Subgen" \\\
+  -srcfolder dist/Subgen.app \\\
+  -ov -format UDZO Subgen.dmg\
+```\
+\
+### \uc0\u33258 \u21160 \u26356 \u26032 \
+```python\
+# \uc0\u26816 \u26597  GitHub Releases\
+import requests\
+\
+def check_for_updates():\
+    response = requests.get('https://api.github.com/repos/you/subgen/releases/latest')\
+    latest_version = response.json()['tag_name']\
+    current_version = '1.0.0'\
+    \
+    if latest_version > current_version:\
+        return \{\
+            'available': True,\
+            'version': latest_version,\
+            'download_url': response.json()['assets'][0]['browser_download_url']\
+        \}\
+```\
+\
+---\
+\
+## \uc0\u26410 \u26469 \u25193 \u23637 \u26041 \u21521 \
+\
+1. **\uc0\u20113 \u31471 \u21152 \u36895 **\u65288 \u21487 \u36873 \u20184 \u36153 \u21151 \u33021 \u65289 \
+   - GPU \uc0\u26381 \u21153 \u22120 \u22788 \u29702 \
+   - \uc0\u26356 \u24555 \u30340  Whisper Large-v3\
+   - \uc0\u25209 \u37327 \u22788 \u29702 \u38431 \u21015 \
+\
+2. **\uc0\u32763 \u35793 \u21151 \u33021 **\
+   - \uc0\u38598 \u25104  DeepL/OpenAI GPT\
+   - \uc0\u21452 \u35821 \u23383 \u24149 \u29983 \u25104 \
+\
+3. **\uc0\u35828 \u35805 \u20154 \u35782 \u21035 **\
+   - pyannote.audio diarization\
+   - \uc0\u20026 \u19981 \u21516 \u35828 \u35805 \u20154 \u26631 \u27880 \
+\
+4. **\uc0\u35270 \u39057 \u21387 \u21046 **\
+   - \uc0\u30828 \u23383 \u24149 \u28903 \u24405 \u21040 \u35270 \u39057 \
+   - FFmpeg \uc0\u38598 \u25104 \
+\
+5. **DaVinci Resolve \uc0\u38598 \u25104 **\
+   - XML \uc0\u23548 \u20986 \
+   - \uc0\u26102 \u38388 \u32447 \u21516 \u27493 \
+\
+---\
+\
+## \uc0\u20851 \u38190 \u20195 \u30721 \u29255 \u27573 \u24635 \u32467 \
+\
+### \uc0\u23436 \u25972 \u30340  model_manager.py \u32467 \u26500 \
+```python\
+class ModelManager:\
+    MODELS = \{...\}  # \uc0\u27169 \u22411 \u37197 \u32622 \u23383 \u20856 \
+    __init__(self)\
+    _load_config(self) -> Dict\
+    _save_config(self)\
+    check_installation(self) -> Dict[str, bool]\
+    _check_whisper_model(self, model_id) -> bool\
+    _check_funasr_model(self, model_id) -> bool\
+    install_required_models(self)\
+    download_model(self, model_key)\
+    _download_whisper_model(self, model_id)\
+    _download_funasr_model(self, model_id)\
+    get_recommended_model(self, language) -> str\
+    list_installed_models(self) -> List[Dict]\
+```\
+\
+### \uc0\u23436 \u25972 \u30340  subtitle_engine.py \u32467 \u26500 \
+```python\
+class SubtitleEngine:\
+    __init__(self)\
+    _first_run_check(self)\
+    _load_user_dict(self) -> Dict[str, str]\
+    load_model(self, model_key)\
+    transcribe(self, video_path, model_key, language) -> Dict\
+    _auto_select_model(self, video_path, language) -> str\
+    _transcribe_whisper(self, model, video_path, language) -> Dict\
+    _transcribe_funasr(self, model, video_path) -> Dict\
+    _apply_user_dict(self, result) -> Dict\
+    save_srt(self, result, output_path) -> str\
+    _format_timestamp(self, seconds) -> str\
+```\
+\
+---\
+\
+## AI \uc0\u24320 \u21457 \u25351 \u21335 \u24635 \u32467 \
+\
+**\uc0\u22914 \u26524 \u20320 \u26159  AI \u21161 \u25163 \u25509 \u25163 \u36825 \u20010 \u39033 \u30446 \u65292 \u35831 \u25353 \u20197 \u19979 \u27493 \u39588 \u29702 \u35299 \u21644 \u32487 \u32493 \u24320 \u21457 **:\
+\
+1. **\uc0\u29702 \u35299 \u26680 \u24515 \u38656 \u27714 **: \u29992 \u25143 \u38656 \u35201 \u22788 \u29702 \u26032 \u39532 \u21475 \u38899 \u30340 \u20013 \u33521 \u28151 \u21512 \u35270 \u39057 \u65292 \u29983 \u25104 \u20934 \u30830 \u23383 \u24149 \
+2. **\uc0\u25484 \u25569 \u21452 \u24341 \u25806 \u26550 \u26500 **: FunASR\u65288 \u20013 \u25991 \u65289 + Whisper\u65288 \u33521 \u25991 /\u22810 \u35821 \u35328 \u65289 \
+3. **\uc0\u36981 \u24490 \u27169 \u22359 \u21270 \u35774 \u35745 **: ModelManager\u65288 \u27169 \u22411 \u65289 \u12289 SubtitleEngine\u65288 \u24341 \u25806 \u65289 \u20998 \u31163 \
+4. **\uc0\u20248 \u20808  macOS M1 \u20248 \u21270 **: \u20351 \u29992  Metal \u21152 \u36895 \u65292 \u32771 \u34385  mlx-whisper\
+5. **\uc0\u20998 \u38454 \u27573 \u36845 \u20195 **: MVP \u8594  GUI \u8594  \u39640 \u32423 \u21151 \u33021  \u8594  \u25171 \u21253 \u65292 \u19981 \u35201 \u19968 \u27425 \u20570 \u23436 \
+6. **\uc0\u29992 \u25143 \u20307 \u39564 \u20248 \u20808 **: \u33258 \u21160 \u23433 \u35013 \u27169 \u22411 \u12289 \u26234 \u33021 \u25512 \u33616 \u12289 \u36827 \u24230 \u26174 \u31034 \
+7. **\uc0\u20445 \u25345 \u31616 \u27905 **: \u21482 \u20570 \u23383 \u24149 \u29983 \u25104 \u65292 \u19981 \u35201 \u28155 \u21152 \u26080 \u20851 \u21151 \u33021 \
+8. **\uc0\u27979 \u35797 \u39537 \u21160 **: \u27599 \u20010 \u38454 \u27573 \u29992 \u23454 \u38469 \u35270 \u39057 \u27979 \u35797 \u65292 \u26681 \u25454 \u21453 \u39304 \u35843 \u25972 \
+\
+**\uc0\u24403 \u21069 \u29366 \u24577 **: \u38454 \u27573  1 \u23436 \u25104 \u24230  90%\u65292 \u31561 \u24453 \u29992 \u25143 \u27979 \u35797 \u21453 \u39304 \u21518 \u36827 \u20837 \u38454 \u27573  2\u65288 GUI \u24320 \u21457 \u65289 \
+\
+**\uc0\u19979 \u19968 \u27493 \u34892 \u21160 **: \
+- \uc0\u29992 \u25143 \u27979 \u35797  model_manager.py \u21644  subtitle_engine.py\
+- \uc0\u25910 \u38598 \u21453 \u39304 \u65306 \u35782 \u21035 \u20934 \u30830 \u24230 \u12289 \u22788 \u29702 \u36895 \u24230 \u12289 \u38169 \u35823 \u20449 \u24687 \
+- \uc0\u26681 \u25454 \u27979 \u35797 \u32467 \u26524 \u20248 \u21270 \u26680 \u24515 \u24341 \u25806 \
+- \uc0\u35774 \u35745  PyQt6 GUI \u30028 \u38754 \u21407 \u22411 \
+\
+---\
+\
+**\uc0\u39033 \u30446 \u20179 \u24211 \u32467 \u26500 **:\
+```\
+Subgen/\
+\uc0\u9500 \u9472 \u9472  model_manager.py      # \u27169 \u22411 \u31649 \u29702 \u22120 \
+\uc0\u9500 \u9472 \u9472  subtitle_engine.py    # \u23383 \u24149 \u24341 \u25806 \
+\uc0\u9500 \u9472 \u9472  gui.py               # GUI \u30028 \u38754 \u65288 \u24453 \u24320 \u21457 \u65289 \
+\uc0\u9500 \u9472 \u9472  requirements.txt     # \u20381 \u36182 \u21015 \u34920 \
+\uc0\u9500 \u9472 \u9472  README.md           # \u39033 \u30446 \u35828 \u26126 \
+\uc0\u9500 \u9472 \u9472  tests/              # \u27979 \u35797 \u25991 \u20214 \
+\uc0\u9474    \u9500 \u9472 \u9472  test_model_manager.py\
+\uc0\u9474    \u9492 \u9472 \u9472  test_subtitle_engine.py\
+\uc0\u9492 \u9472 \u9472  docs/               # \u25991 \u26723 \
+    \uc0\u9492 \u9472 \u9472  project_spec.md  # \u26412 \u25991 \u26723 \
+```\
+\
+**\uc0\u20381 \u36182 \u23433 \u35013 \u21629 \u20196 **:\
+```bash\
+pip install openai-whisper funasr modelscope PyQt6 ffmpeg-python pysrt tqdm torch torchaudio\
+```\
+\
+**\uc0\u39318 \u27425 \u36816 \u34892 **:\
+```bash\
+python model_manager.py install  # \uc0\u23433 \u35013 \u24517 \u38656 \u27169 \u22411 \
+python subtitle_engine.py        # \uc0\u27979 \u35797 \u23383 \u24149 \u29983 \u25104 \
+```\
+\
+---\
+\
+**\uc0\u29256 \u26412 **: v0.1.0-alpha  \
+**\uc0\u26368 \u21518 \u26356 \u26032 **: 2025-01-27  \
+**\uc0\u20316 \u32773 **: AI \u36741 \u21161 \u24320 \u21457   \
+**\uc0\u35768 \u21487 **: MIT}
