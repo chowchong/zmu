@@ -639,27 +639,275 @@ class SubtitleEngine:
 
     def merge_subtitles(self, original_path: str, translated_path: str, track_order: List[str], output_path: str):
         """
-        Merge two SRT files based on track order.
+        Merge two SRT files based on track order with intelligent timecode handling and alignment.
         track_order: ['original', 'translated'] or ['translated', 'original']
+        
+        Auto-conversion:
+        - Detects non-standard timecode formats (HH:MM:SS:FF)
+        - Automatically converts to standard SRT format (HH:MM:SS,mmm)
+        - Seamless one-click operation
+        
+        Timecode Strategy:
+        - If timecodes match closely (within 100ms), use averaged timecode
+        - Otherwise, use the timecode from the longer/more complete file
+        - Handles files with different lengths gracefully
+        
+        Intelligent Alignment:
+        - Detects when one language has split sentences while the other doesn't
+        - Automatically aligns based on start/end timecodes
+        - Duplicates text from fewer subtitles to match more subtitles
+        """
+        import pysrt
+        import re
+        import tempfile
+        
+        # Auto-convert non-standard formats if needed
+        original_path = self._auto_convert_srt_format(original_path)
+        translated_path = self._auto_convert_srt_format(translated_path)
+        
+        try:
+            subs_orig = pysrt.open(original_path, encoding='utf-8')
+            subs_trans = pysrt.open(translated_path, encoding='utf-8')
+        except Exception as e:
+            raise ValueError(f"无法读取SRT文件: {e}")
+        
+        # Check for empty files with detailed error message
+        if len(subs_orig) == 0 and len(subs_trans) == 0:
+            raise ValueError(f"两个SRT文件都是空的！\n文件1: {Path(original_path).name}\n文件2: {Path(translated_path).name}")
+        elif len(subs_orig) == 0:
+            raise ValueError(f"文件1是空的（没有字幕）：{Path(original_path).name}\n请检查文件内容")
+        elif len(subs_trans) == 0:
+            raise ValueError(f"文件2是空的（没有字幕）：{Path(translated_path).name}\n请检查文件内容")
+        
+        print(f"    📊 文件1: {len(subs_orig)} 条字幕")
+        print(f"    📊 文件2: {len(subs_trans)} 条字幕")
+        
+        # Check if counts match
+        if len(subs_orig) == len(subs_trans):
+            print(f"    ✓ 字幕数量匹配，使用简单合并模式")
+            return self._merge_aligned_subtitles(subs_orig, subs_trans, track_order, output_path, original_path, translated_path)
+        else:
+            print(f"    ⚠️  字幕数量不匹配，启用智能对齐模式")
+            return self._merge_with_alignment(subs_orig, subs_trans, track_order, output_path, original_path, translated_path)
+    
+    def _auto_convert_srt_format(self, srt_path: str) -> str:
+        """
+        Auto-detect and convert non-standard SRT timecode formats.
+        Returns the path to a valid SRT file (original or converted temp file).
+        """
+        import re
+        import tempfile
+        
+        try:
+            with open(srt_path, 'r', encoding='utf-8') as f:
+                content = f.read()
+            
+            # Check if file uses non-standard timecode format (HH:MM:SS:FF - HH:MM:SS:FF)
+            # Standard SRT format: HH:MM:SS,mmm --> HH:MM:SS,mmm
+            timecode_pattern = r'\d{2}:\d{2}:\d{2}:\d{2}\s*-\s*\d{2}:\d{2}:\d{2}:\d{2}'
+            
+            if re.search(timecode_pattern, content):
+                print(f"    🔄 检测到非标准格式，自动转换中...")
+                
+                # Convert the format
+                converted_path = self._convert_timecode_format(srt_path)
+                print(f"    ✓ 格式转换完成")
+                return converted_path
+            else:
+                # Already in standard format
+                return srt_path
+                
+        except Exception as e:
+            print(f"    ⚠️  格式检测失败，使用原文件: {e}")
+            return srt_path
+    
+    def _convert_timecode_format(self, input_path: str, fps: int = 25) -> str:
+        """
+        Convert timecode format from HH:MM:SS:FF to HH:MM:SS,mmm
+        Returns path to converted temp file.
+        """
+        import re
+        import tempfile
+        
+        with open(input_path, 'r', encoding='utf-8') as f:
+            lines = f.readlines()
+        
+        output_lines = []
+        subtitle_index = 1
+        i = 0
+        
+        # Timecode pattern: HH:MM:SS:FF - HH:MM:SS:FF
+        timecode_pattern = r'(\d{2}):(\d{2}):(\d{2}):(\d{2})\s*-\s*(\d{2}):(\d{2}):(\d{2}):(\d{2})'
+        
+        while i < len(lines):
+            line = lines[i].strip()
+            match = re.match(timecode_pattern, line)
+            
+            if match:
+                # Extract time components
+                h1, m1, s1, f1 = match.groups()[:4]
+                h2, m2, s2, f2 = match.groups()[4:]
+                
+                # Convert frames to milliseconds
+                ms1 = int(f1) * 1000 // fps
+                ms2 = int(f2) * 1000 // fps
+                
+                # Build standard SRT timecode
+                start_time = f"{h1}:{m1}:{s1},{ms1:03d}"
+                end_time = f"{h2}:{m2}:{s2},{ms2:03d}"
+                
+                # Write subtitle index
+                output_lines.append(f"{subtitle_index}\n")
+                
+                # Write timecode
+                output_lines.append(f"{start_time} --> {end_time}\n")
+                
+                # Collect subtitle text (until empty line)
+                i += 1
+                while i < len(lines) and lines[i].strip():
+                    output_lines.append(lines[i])
+                    i += 1
+                
+                # Add separator
+                output_lines.append("\n")
+                subtitle_index += 1
+            
+            i += 1
+        
+        # Save to temp file
+        temp_fd, temp_path = tempfile.mkstemp(suffix='.srt', text=True)
+        try:
+            with os.fdopen(temp_fd, 'w', encoding='utf-8') as f:
+                f.writelines(output_lines)
+        except:
+            os.close(temp_fd)
+            raise
+        
+        return temp_path
+    
+    def _merge_aligned_subtitles(self, subs_orig, subs_trans, track_order, output_path, original_path, translated_path):
+        """Simple merge when subtitle counts match"""
+        import pysrt
+        
+        merged_subs = pysrt.SubRipFile()
+        
+        for i in range(len(subs_orig)):
+            orig_item = subs_orig[i]
+            trans_item = subs_trans[i]
+            
+            # Average timecodes if they're close
+            start_diff = abs(orig_item.start.ordinal - trans_item.start.ordinal)
+            end_diff = abs(orig_item.end.ordinal - trans_item.end.ordinal)
+            
+            if start_diff < 100 and end_diff < 100:
+                avg_start = (orig_item.start.ordinal + trans_item.start.ordinal) // 2
+                avg_end = (orig_item.end.ordinal + trans_item.end.ordinal) // 2
+                final_start = pysrt.SubRipTime(milliseconds=avg_start)
+                final_end = pysrt.SubRipTime(milliseconds=avg_end)
+            else:
+                final_start = orig_item.start
+                final_end = orig_item.end
+            
+            # Combine texts
+            parts = []
+            for track in track_order:
+                if track == 'original':
+                    parts.append(orig_item.text)
+                elif track == 'translated':
+                    parts.append(trans_item.text)
+            
+            combined_text = "\n".join(parts)
+            
+            item = pysrt.SubRipItem(
+                index=i + 1,
+                start=final_start,
+                end=final_end,
+                text=combined_text
+            )
+            merged_subs.append(item)
+        
+        merged_subs.save(output_path, encoding='utf-8')
+        print(f"✨ 合并字幕已保存: {output_path}")
+        print(f"   共 {len(merged_subs)} 条字幕")
+        return output_path
+    
+    def _merge_with_alignment(self, subs_orig, subs_trans, track_order, output_path, original_path, translated_path):
+        """
+        Intelligent merge when subtitle counts don't match.
+        Uses the file with MORE subtitles as base and duplicates text from the file with FEWER subtitles.
+        
+        Example: 
+        - Chinese: 3 sentences (split)
+        - English: 1 sentence (complete)
+        → Output: 3 subtitles, each with English text duplicated
         """
         import pysrt
         
-        subs_orig = pysrt.open(original_path)
-        subs_trans = pysrt.open(translated_path)
+        # Determine which has more subtitles - THIS IS THE BASE
+        if len(subs_orig) > len(subs_trans):
+            more_subs = subs_orig  # Base with more entries
+            less_subs = subs_trans  # Source to duplicate from
+            more_is_orig = True
+        else:
+            more_subs = subs_trans  # Base with more entries
+            less_subs = subs_orig  # Source to duplicate from
+            more_is_orig = False
         
-        # Ensure lengths match roughly (using original as base)
+        print(f"    🔍 对齐策略: 使用 {len(more_subs)} 条作为基准，复制 {len(less_subs)} 条的文本")
+        
         merged_subs = pysrt.SubRipFile()
+        less_idx = 0
         
-        limit = min(len(subs_orig), len(subs_trans))
-        
-        for i in range(limit):
-            orig = subs_orig[i]
-            trans = subs_trans[i]
+        for more_idx in range(len(more_subs)):
+            more_item = more_subs[more_idx]
             
-            text_orig = orig.text
-            text_trans = trans.text
+            # Find the corresponding less_item that covers this more_item's time
+            # Look for the less_item whose time range contains or overlaps with more_item
+            matched_less_item = None
             
-            # Combine based on order
+            # Search from current less_idx position
+            for search_idx in range(less_idx, min(less_idx + 10, len(less_subs))):
+                less_item = less_subs[search_idx]
+                
+                # Check if less_item's time range covers or overlaps with more_item
+                # Overlap if: less_start <= more_end AND less_end >= more_start
+                overlaps = (less_item.start.ordinal <= more_item.end.ordinal and
+                           less_item.end.ordinal >= more_item.start.ordinal)
+                
+                if overlaps:
+                    matched_less_item = less_item
+                    
+                    # Update less_idx for next iteration if we're getting close to the end
+                    # of less_item's time range
+                    if more_item.end.ordinal >= less_item.end.ordinal - 200:
+                        less_idx = min(search_idx + 1, len(less_subs) - 1)
+                    
+                    break
+            
+            # If no match found, use the current less_idx item or previous one
+            if not matched_less_item:
+                if less_idx < len(less_subs):
+                    matched_less_item = less_subs[less_idx]
+                else:
+                    matched_less_item = less_subs[-1]  # Use last item
+            
+            # Use more_item's timecode (the split one)
+            final_start = more_item.start
+            final_end = more_item.end
+            
+            # Get texts
+            more_text = more_item.text
+            less_text = matched_less_item.text
+            
+            # Determine which is original and which is translated
+            if more_is_orig:
+                text_orig = more_text
+                text_trans = less_text  # This will be duplicated across splits
+            else:
+                text_orig = less_text  # This will be duplicated across splits
+                text_trans = more_text
+            
+            # Combine based on track order
             parts = []
             for track in track_order:
                 if track == 'original':
@@ -670,13 +918,16 @@ class SubtitleEngine:
             combined_text = "\n".join(parts)
             
             item = pysrt.SubRipItem(
-                index=orig.index,
-                start=orig.start,
-                end=orig.end,
+                index=more_idx + 1,
+                start=final_start,
+                end=final_end,
                 text=combined_text
             )
             merged_subs.append(item)
-            
+        
+        # Save result
         merged_subs.save(output_path, encoding='utf-8')
         print(f"✨ 合并字幕已保存: {output_path}")
+        print(f"   共 {len(merged_subs)} 条字幕")
+        print(f"   📝 从 {len(less_subs)} 条复制文本到 {len(more_subs)} 条分割片段")
         return output_path

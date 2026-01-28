@@ -475,6 +475,47 @@ class MainWindow(QMainWindow):
         self.radio_exp_separate = QRadioButton("SEPARATE FILES"); self.radio_exp_separate.mode='separate'; self.radio_exp_separate.setStyleSheet(RADIO_BUTTON_STYLE)
         self.export_group.addButton(self.radio_exp_merge); self.export_group.addButton(self.radio_exp_separate)
         t2_layout.addWidget(self.radio_exp_merge); t2_layout.addWidget(self.radio_exp_separate)
+        
+        # === SRT MERGE TOOL ===
+        t2_layout.addWidget(QLabel(""))  # Spacer
+        merge_label = QLabel("═══ MERGE SRT FILES ═══")
+        merge_label.setStyleSheet(f"color: {COLORS['primary']}; font-weight: bold; margin-top: 10px;")
+        t2_layout.addWidget(merge_label)
+        
+        # File 1 Selection
+        merge_file1_layout = QHBoxLayout()
+        self.btn_merge_file1 = QPushButton("[ SELECT FILE 1 ]")
+        self.btn_merge_file1.setStyleSheet(SECONDARY_BUTTON_STYLE)
+        self.btn_merge_file1.clicked.connect(self.select_merge_file1)
+        merge_file1_layout.addWidget(self.btn_merge_file1)
+        
+        self.label_merge_file1 = QLabel("未选择")
+        self.label_merge_file1.setStyleSheet(f"color: {COLORS['text_secondary']}; font-size: 11px;")
+        merge_file1_layout.addWidget(self.label_merge_file1, 1)
+        t2_layout.addLayout(merge_file1_layout)
+        
+        # File 2 Selection
+        merge_file2_layout = QHBoxLayout()
+        self.btn_merge_file2 = QPushButton("[ SELECT FILE 2 ]")
+        self.btn_merge_file2.setStyleSheet(SECONDARY_BUTTON_STYLE)
+        self.btn_merge_file2.clicked.connect(self.select_merge_file2)
+        merge_file2_layout.addWidget(self.btn_merge_file2)
+        
+        self.label_merge_file2 = QLabel("未选择")
+        self.label_merge_file2.setStyleSheet(f"color: {COLORS['text_secondary']}; font-size: 11px;")
+        merge_file2_layout.addWidget(self.label_merge_file2, 1)
+        t2_layout.addLayout(merge_file2_layout)
+        
+        # Merge Button
+        self.btn_execute_merge = QPushButton("[ ⚡ MERGE NOW ]")
+        self.btn_execute_merge.setStyleSheet(PRIMARY_BUTTON_STYLE)
+        self.btn_execute_merge.clicked.connect(self.execute_srt_merge)
+        t2_layout.addWidget(self.btn_execute_merge)
+        
+        # Store selected file paths
+        self.merge_file1_path = None
+        self.merge_file2_path = None
+        
         t2_layout.addStretch()
         
         self.tabs.addTab(tab_general, "GENERAL")
@@ -810,6 +851,105 @@ class MainWindow(QMainWindow):
             )
             
         self.worker = None
+
+    def select_merge_file1(self):
+        """选择第一个SRT文件"""
+        file_path, _ = QFileDialog.getOpenFileName(
+            self, 
+            "选择第一个字幕文件", 
+            "", 
+            "SRT Files (*.srt);;All Files (*)"
+        )
+        if file_path:
+            self.merge_file1_path = file_path
+            self.label_merge_file1.setText(Path(file_path).name)
+            self.label_merge_file1.setStyleSheet(f"color: {COLORS['progress']}; font-size: 11px;")
+            self.log_view.append(f"[MERGE] 已选择文件1: {Path(file_path).name}")
+
+    def select_merge_file2(self):
+        """选择第二个SRT文件"""
+        file_path, _ = QFileDialog.getOpenFileName(
+            self, 
+            "选择第二个字幕文件", 
+            "", 
+            "SRT Files (*.srt);;All Files (*)"
+        )
+        if file_path:
+            self.merge_file2_path = file_path
+            self.label_merge_file2.setText(Path(file_path).name)
+            self.label_merge_file2.setStyleSheet(f"color: {COLORS['progress']}; font-size: 11px;")
+            self.log_view.append(f"[MERGE] 已选择文件2: {Path(file_path).name}")
+
+    def execute_srt_merge(self):
+        """执行SRT文件合并"""
+        # Validate files selected
+        if not self.merge_file1_path or not self.merge_file2_path:
+            QMessageBox.warning(self, "提示", "请先选择两个SRT文件")
+            return
+        
+        if not Path(self.merge_file1_path).exists():
+            QMessageBox.warning(self, "错误", f"文件1不存在: {self.merge_file1_path}")
+            return
+            
+        if not Path(self.merge_file2_path).exists():
+            QMessageBox.warning(self, "错误", f"文件2不存在: {self.merge_file2_path}")
+            return
+        
+        try:
+            # Get track order from UI
+            track_order = []
+            for i in range(self.track_list.count()):
+                item = self.track_list.item(i)
+                track_key = item.data(Qt.ItemDataRole.UserRole)
+                track_order.append(track_key)
+            
+            # Determine which file is which based on track order
+            # Assume: 'original' -> file1, 'translated' -> file2
+            # But we'll use the order directly
+            file1_name = Path(self.merge_file1_path).stem
+            file2_name = Path(self.merge_file2_path).stem
+            
+            # Generate output path (save next to first file)
+            output_dir = Path(self.merge_file1_path).parent
+            output_path = output_dir / f"{file1_name}+{file2_name}.merged.srt"
+            
+            self.log_view.append(f"[MERGE] 正在合并字幕文件...")
+            self.log_view.append(f"[MERGE] 轨道顺序: {' -> '.join(track_order)}")
+            
+            # Use SubtitleEngine to merge
+            from subtitle_engine import SubtitleEngine
+            engine = SubtitleEngine()
+            
+            # Map track order: first track gets file1, second gets file2
+            # This allows flexibility in how user wants to combine
+            merged_path = engine.merge_subtitles(
+                original_path=self.merge_file1_path,
+                translated_path=self.merge_file2_path,
+                track_order=track_order,
+                output_path=str(output_path)
+            )
+            
+            self.log_view.append(f"[SUCCESS] ✨ 合并完成: {Path(merged_path).name}")
+            
+            # Ask if user wants to open editor
+            reply = QMessageBox.question(
+                self,
+                "合并成功",
+                f"字幕已成功合并!\n\n保存位置:\n{merged_path}\n\n是否打开编辑器？",
+                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+                QMessageBox.StandardButton.Yes
+            )
+            
+            if reply == QMessageBox.StandardButton.Yes:
+                from editor_gui import SubtitleEditor
+                self.editor = SubtitleEditor(merged_path)
+                self.editor.show()
+                
+        except Exception as e:
+            import traceback
+            error_msg = f"合并失败: {str(e)}\n\n{traceback.format_exc()}"
+            self.log_view.append(f"[ERROR] {error_msg}")
+            QMessageBox.critical(self, "合并失败", error_msg)
 
 
 def main():
